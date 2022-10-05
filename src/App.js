@@ -1,25 +1,28 @@
-import { useEffect, useState } from 'react';
-import FeaturedOthers from './FeaturedOthers';
-import FeaturedUpcomingMovies from './FeaturedUpcomingMovies';
+import { Routes, Route } from 'react-router-dom';
+import Home from './Home';
 import Menu from './Menu';
-import Navbar from './Navbar';
-import Genre from './Genre';
 import Search from './Search';
+import Genre from './Genre';
+import NotFound from './NotFound';
+import MoviePage from './MoviePage';
+import CategoryPage from './CategoryPage';
+import { useState, useEffect } from 'react';
 
 function App() {
-	const API_KEY = 'aef14956eb2fe627aa039f4dc8e3a7b7';
-	const BASE_URL = 'https://api.themoviedb.org/3/';
-
+	const API_KEY = `${process.env.REACT_APP_API_KEY}`;
+	const BASE_URL = `${process.env.REACT_APP_BASE_URL}`;
 	const [upcomingMovies, setUpcomingMovies] = useState([]);
 	const [popularMovies, setPopularMovies] = useState([]);
 	const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
 	const [topRatedMovies, setTopRatedMovies] = useState([]);
+	const [genres, setGenres] = useState([]);
+	const IMG_URL = 'https://image.tmdb.org/t/p/';
 
 	useEffect(() => {
 		fetch(`${BASE_URL}movie/upcoming?api_key=${API_KEY}`)
 			.then(response =>
 				response.json().then(data => {
-					setUpcomingMovies(data.results);
+					setUpcomingMovies(data.results.sort(() => Math.random() - 0.5));
 				})
 			)
 			.catch(error => {
@@ -30,7 +33,7 @@ function App() {
 		fetch(`${BASE_URL}movie/popular?api_key=${API_KEY}`)
 			.then(response =>
 				response.json().then(data => {
-					setPopularMovies(data.results);
+					setPopularMovies(data.results.sort(() => Math.random() - 0.5));
 				})
 			)
 			.catch(error => {
@@ -41,7 +44,7 @@ function App() {
 		fetch(`${BASE_URL}movie/now_playing?api_key=${API_KEY}`)
 			.then(response =>
 				response.json().then(data => {
-					setNowPlayingMovies(data.results);
+					setNowPlayingMovies(data.results.sort(() => Math.random() - 0.5));
 				})
 			)
 			.catch(error => {
@@ -59,28 +62,93 @@ function App() {
 				console.log(`An error has occured: ${error}`);
 			});
 	}, []);
+	useEffect(() => {
+		fetch(`${BASE_URL}genre/movie/list?api_key=${API_KEY}`)
+			.then(response =>
+				response.json().then(data => {
+					setGenres(data.genres);
+				})
+			)
+			.catch(error => {
+				console.log(`An error has occured: ${error}`);
+			});
+	}, []);
 
 	return (
 		<div className='container'>
 			<Menu />
-			<div className='main-container'>
-				<Navbar />
-				<FeaturedUpcomingMovies
-					upcomingMovies={upcomingMovies.sort(() => Math.random() - 0.5)}
+			<Routes>
+				<Route
+					path='/'
+					element={
+						<Home
+							upcomingMovies={upcomingMovies}
+							popularMovies={popularMovies}
+							nowPlayingMovies={nowPlayingMovies}
+							topRatedMovies={topRatedMovies}
+							IMG_URL={IMG_URL}
+							genres={genres}
+						/>
+					}
 				/>
-				<FeaturedOthers
-					featuredMovies={popularMovies.sort(() => Math.random() - 0.5)}
-					title={'Popular now'}
+				<Route
+					path='upcoming'
+					element={
+						<CategoryPage
+							API_KEY={API_KEY}
+							BASE_URL={BASE_URL}
+							movies={upcomingMovies}
+							IMG_URL={IMG_URL}
+							category={'upcoming'}
+							title='Upcoming movies'
+						/>
+					}
 				/>
-				<FeaturedOthers
-					featuredMovies={nowPlayingMovies.sort(() => Math.random() - 0.5)}
-					title={'Now playing'}
+				<Route
+					path='popular'
+					element={
+						<CategoryPage
+							API_KEY={API_KEY}
+							BASE_URL={BASE_URL}
+							movies={popularMovies}
+							IMG_URL={IMG_URL}
+							category={'popular'}
+							title='Popular now'
+						/>
+					}
 				/>
-				<FeaturedOthers featuredMovies={topRatedMovies} title={'Top rated'} />
-			</div>
+				<Route
+					path='now_playing'
+					element={
+						<CategoryPage
+							API_KEY={API_KEY}
+							BASE_URL={BASE_URL}
+							movies={nowPlayingMovies}
+							IMG_URL={IMG_URL}
+							category={'now_playing'}
+							title='Now playing'
+						/>
+					}
+				/>
+				<Route
+					path='top_rated'
+					element={
+						<CategoryPage
+							API_KEY={API_KEY}
+							BASE_URL={BASE_URL}
+							movies={topRatedMovies}
+							IMG_URL={IMG_URL}
+							category={'top_rated'}
+							title='Top rated movies'
+						/>
+					}
+				/>
+				<Route path='movie/:id' element={<MoviePage />} />
+				<Route path='*' element={<NotFound />} />
+			</Routes>
 			<div className='genre-search-container'>
-				<Search API_KEY={API_KEY} BASE_URL={BASE_URL}/>
-				<Genre API_KEY={API_KEY} BASE_URL={BASE_URL} />
+				<Search API_KEY={API_KEY} BASE_URL={BASE_URL} />
+				<Genre genres={genres} />
 			</div>
 		</div>
 	);
