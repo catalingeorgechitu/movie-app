@@ -5,10 +5,10 @@ export default function Navbar() {
 	return (
 		<div className='navbar-container'>
 			<div className='navbar-titles'>
-				<Link className='btn' to='/'>
+				<Link className='btn navbar-btn' to='/'>
 					Movies
 				</Link>
-				<Link className='btn' to='/shows'>
+				<Link className='btn navbar-btn' to='/shows'>
 					TV Shows
 				</Link>
 			</div>

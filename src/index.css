@@ -49,6 +49,24 @@
 	.btn {
 		@apply hover:cursor-pointer hover:text-gray-400 duration-300;
 	}
+	.navbar-btn {
+		@apply hover:scale-105 duration-300;
+	}
+	.watch-trailer-btn {
+		@apply hover:scale-105 duration-300 hover:text-white;
+	}
+	.watch-upcoming-trailer-btn {
+		@apply bg-[#bd1212ab] px-3 py-2 rounded-full text-white;
+	}
+	.watch-other-trailer-btn {
+		@apply bg-[#bd1212ab] px-2 py-1 rounded-full text-white;
+	}
+	.upcoming-add-to-favorites-btn {
+		@apply text-white bg-[#d4d4d4ab] rounded-full text-2xl h-10 w-10 align-bottom hover:text-white hover:scale-105 duration-300;
+	}
+	.other-add-to-favorites-btn {
+		@apply text-white bg-[#d4d4d4ab] rounded-full text-xl h-8 w-8 hover:text-white hover:scale-105 duration-300;
+	}
 	/* -----end of buttons----- */
 
 	/* -----left menu----- */
@@ -63,6 +81,9 @@
 	}
 	.submenu-elements {
 		@apply space-y-6 gap-3 py-4;
+	}
+	.submenu-element {
+		@apply hover:scale-105 duration-300;
 	}
 	.submenu-element a {
 		@apply space-x-3 text-lg;
@@ -98,13 +119,13 @@
 		@apply flex flex-nowrap overflow-x-auto;
 	}
 	.featured-upcoming-movie {
-		@apply w-[600px] shrink-0 relative mr-4;
+		@apply w-[600px] shrink-0 relative mr-4 hover:scale-95 duration-500;
 	}
 	.featured-other-movie {
-		@apply w-[400px] shrink-0 relative mr-4;
+		@apply w-[400px] shrink-0 relative mr-4 hover:scale-95 duration-500;
 	}
 	.featured-upcoming-infos {
-		@apply absolute bottom-0 px-8 py-5 w-full;
+		@apply absolute bottom-0 px-8 pb-5 w-full;
 	}
 	.featured-other-infos {
 		@apply absolute bottom-0 px-4 py-2 w-full;
@@ -145,18 +166,6 @@
 	.featured-other-more-infos-right {
 		@apply space-x-1;
 	}
-	.watch-upcoming-trailer-btn {
-		@apply bg-[#bd1212ab] px-3 py-2 rounded-full text-white;
-	}
-	.watch-other-trailer-btn {
-		@apply bg-[#bd1212ab] px-2 py-1 rounded-full text-white;
-	}
-	.upcoming-add-to-favorites-btn {
-		@apply text-white bg-[#d4d4d4ab] rounded-full text-2xl h-10 w-10 align-bottom;
-	}
-	.other-add-to-favorites-btn {
-		@apply text-white bg-[#d4d4d4ab] rounded-full text-xl h-8 w-8;
-	}
 	/* -----end of main container / main page----- */
 
 	/* -----right menu----- */
@@ -164,7 +173,7 @@
 		@apply bg-[#1A171E] pt-10 px-4 w-96 shrink-0 sticky top-0 h-screen overflow-y-auto;
 	}
 	.searchbar {
-		@apply bg-[#0D0D0F] p-2 pl-4 w-80 m-1 rounded-lg relative shadow-lg;
+		@apply bg-[#0D0D0F] p-2 pl-4 w-80 m-1 rounded-lg relative shadow-lg focus:scale-105 duration-300;
 	}
 	.search-container {
 		@apply absolute bg-[#d4d4d4ab] rounded-sm max-h-56 overflow-y-auto shadow-xl rounded-md;
@@ -185,10 +194,13 @@
 		@apply grid grid-cols-2 gap-2 pt-3;
 	}
 	.genre {
-		@apply w-36 bg-[#0D0D0F] rounded-full p-1 pl-2 flex justify-between items-center shadow-lg;
+		@apply w-36 bg-[#0D0D0F] rounded-full p-1 pl-2 flex justify-between items-center shadow-lg hover:scale-105 duration-300;
 	}
 	.genre-add-btn {
 		@apply text-xl pr-2;
+	}
+	.recommended-movie {
+		@apply shrink-0 relative w-full hover:scale-95 duration-500;
 	}
 	/* -----end of right menu----- */
 
@@ -199,8 +211,11 @@
 	.category-title {
 		@apply text-4xl text-white mb-10 pb-4 border-b border-b-[#75787d65];
 	}
+	.category-movie {
+		@apply hover:scale-105 duration-500;
+	}
 	.category-movie a {
-		@apply flex justify-between space-x-4 space-y-1;
+		@apply flex  space-x-4 space-y-1;
 	}
 	.category-poster {
 		@apply rounded-sm w-[400px];
@@ -222,10 +237,10 @@
 
 	/* -----main container / movie page----- */
 	.movie-container {
-		@apply flex px-40 pt-20 flex-col;
+		@apply flex flex-col px-32 pt-14 grow items-center;
 	}
 	.title-container {
-		@apply flex justify-between;
+		@apply flex justify-between w-full max-w-[1000px];
 	}
 	.movie-title {
 		@apply text-5xl text-white;
@@ -240,19 +255,31 @@
 		@apply flex gap-x-5 text-white;
 	}
 	.movie-media {
-		@apply flex gap-x-5 justify-center py-4;
+		@apply flex gap-x-5 justify-center py-4 max-w-[1000px];
 	}
 	.movie-poster {
-		@apply h-[405px];
+		@apply h-[405px] hover:scale-105 duration-700;
 	}
 	.movie-genres {
-		@apply flex gap-x-3;
+		@apply flex gap-x-3 w-full max-w-[1000px];
 	}
 	.movie-genre {
 		@apply border rounded-full px-2 font-bold border-[#9b9fa5];
 	}
 	.movie-description {
-		@apply pt-2;
+		@apply pt-2 w-full max-w-[1000px];
+	}
+	.recommendation-container {
+		@apply pt-7 w-full max-w-[1000px];
+	}
+	.recommendation-movies-container {
+		@apply flex overflow-x-auto;
+	}
+	.recommendation-header {
+		@apply pb-4 text-xl;
+	}
+	.recommendation-header > .recommendation-title {
+		@apply text-white font-bold text-2xl;
 	}
 	/* -----end of main container / movie page ----- */
 }

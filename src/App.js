@@ -7,16 +7,19 @@ import NotFound from './NotFound';
 import MoviePage from './MoviePage';
 import CategoryPage from './CategoryPage';
 import { useState, useEffect } from 'react';
+import Recommended from './Recommended';
 
 function App() {
 	const API_KEY = `${process.env.REACT_APP_API_KEY}`;
 	const BASE_URL = `${process.env.REACT_APP_BASE_URL}`;
+	const IMG_URL = `${process.env.REACT_APP_IMG_URL}`;
 	const [upcomingMovies, setUpcomingMovies] = useState([]);
 	const [popularMovies, setPopularMovies] = useState([]);
 	const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
 	const [topRatedMovies, setTopRatedMovies] = useState([]);
+	const [genreMovies, setGenreMovies] = useState([]);
+	const [genreTitle, setGenreTitle] = useState([]);
 	const [genres, setGenres] = useState([]);
-	const IMG_URL = 'https://image.tmdb.org/t/p/';
 
 	useEffect(() => {
 		fetch(`${BASE_URL}movie/upcoming?api_key=${API_KEY}`)
@@ -143,12 +146,33 @@ function App() {
 						/>
 					}
 				/>
+				<Route
+					path={`genres/:genre`}
+					element={
+						<CategoryPage
+							IMG_URL={IMG_URL}
+							movies={genreMovies}
+							title={`Genre: ${genreTitle}`}
+						/>
+					}
+				/>
 				<Route path='movie/:id' element={<MoviePage />} />
 				<Route path='*' element={<NotFound />} />
 			</Routes>
 			<div className='genre-search-container'>
 				<Search API_KEY={API_KEY} BASE_URL={BASE_URL} />
-				<Genre genres={genres} />
+				<Genre
+					API_KEY={API_KEY}
+					BASE_URL={BASE_URL}
+					genres={genres}
+					setGenreMovies={setGenreMovies}
+					setGenreTitle={setGenreTitle}
+				/>
+				<Recommended
+					featuredMovies={popularMovies}
+					IMG_URL={IMG_URL}
+					title='Recommended by us'
+				/>
 			</div>
 		</div>
 	);

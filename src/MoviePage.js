@@ -1,11 +1,12 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import MoviePageRecommendations from './MoviePageRecommendations';
 
 export default function MoviePage() {
 	const API_KEY = `${process.env.REACT_APP_API_KEY}`;
 	const BASE_URL = `${process.env.REACT_APP_BASE_URL}`;
-	const IMG_URL = 'https://image.tmdb.org/t/p/w500';
+	const IMG_URL = `${process.env.REACT_APP_IMG_URL}`;
 	const movieId = useParams().id;
 	const [movie, setMovie] = useState({});
 	const [videos, setVideos] = useState([]);
@@ -62,7 +63,7 @@ export default function MoviePage() {
 						{movie.poster_path && (
 							<img
 								className='movie-poster'
-								src={`${IMG_URL}${movie.poster_path}`}
+								src={`${IMG_URL}w500${movie.poster_path}`}
 								alt='Movie Poster'
 							/>
 						)}
@@ -88,6 +89,12 @@ export default function MoviePage() {
 						))}{' '}
 					</div>
 					<div className='movie-description'>{movie.overview}</div>
+					<MoviePageRecommendations
+						BASE_URL={BASE_URL}
+						API_KEY={API_KEY}
+						movieId={movieId}
+						IMG_URL={IMG_URL}
+					/>
 				</div>
 			)}
 		</>
