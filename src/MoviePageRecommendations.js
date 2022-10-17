@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import AddToFavorites from './AddToFavorites';
 import logo from './img/imdb.svg';
 
 export default function MoviePageRecommendations({
@@ -9,10 +10,12 @@ export default function MoviePageRecommendations({
 	API_KEY,
 	movieId,
 	IMG_URL,
+	favorites,
+	setFavorites,
+	favBtnText,
 }) {
 	const [recommendedMovies, setRecommendedMovies] = useState([]);
 
-	console.log(recommendedMovies);
 	useEffect(() => {
 		fetch(`${BASE_URL}movie/${movieId}/recommendations?api_key=${API_KEY}`)
 			.then(response =>
@@ -52,17 +55,22 @@ export default function MoviePageRecommendations({
 												{movie.vote_average.toFixed(1)} rating
 											</p>
 										</div>
-										<div className='featured-other-more-infos-right'>
-											<button className='btn watch-trailer-btn watch-other-trailer-btn'>
-												Watch trailer
-											</button>
-											<button className='btn add-to-favorites-btn other-add-to-favorites-btn'>
-												&#43;
-											</button>
-										</div>
 									</div>
 								</div>
 							</Link>
+							<div className='featured-other-more-infos-right'>
+								<Link to={`/movie/${movie.id}`}>
+									<button className='btn watch-trailer-btn watch-other-trailer-btn'>
+										Watch trailer
+									</button>
+								</Link>
+								<AddToFavorites
+									movie={movie}
+									favorites={favorites}
+									setFavorites={setFavorites}
+									favBtnText={favBtnText}
+								/>
+							</div>
 						</div>
 					))}
 			</div>

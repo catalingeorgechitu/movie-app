@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './Home';
 import Menu from './Menu';
 import Search from './Search';
@@ -20,62 +20,75 @@ function App() {
 	const [genreMovies, setGenreMovies] = useState([]);
 	const [genreTitle, setGenreTitle] = useState([]);
 	const [genres, setGenres] = useState([]);
+	const [favorites, setFavorites] = useState(
+		JSON.parse(localStorage.getItem('favorites'))
+	);
+	const [pageNumber, setPageNumber] = useState(1);
+	let location = useLocation();
 
 	useEffect(() => {
-		fetch(`${BASE_URL}movie/upcoming?api_key=${API_KEY}`)
+		fetch(`${BASE_URL}movie/upcoming?api_key=${API_KEY}&page=${pageNumber}`)
 			.then(response =>
 				response.json().then(data => {
 					setUpcomingMovies(data.results.sort(() => Math.random() - 0.5));
+					setPageNumber(data.page);
 				})
 			)
 			.catch(error => {
 				console.log(`An error has occured: ${error}`);
 			});
-	}, []);
+	}, [pageNumber]);
 	useEffect(() => {
-		fetch(`${BASE_URL}movie/popular?api_key=${API_KEY}`)
+		fetch(`${BASE_URL}movie/popular?api_key=${API_KEY}&page=${pageNumber}`)
 			.then(response =>
 				response.json().then(data => {
 					setPopularMovies(data.results.sort(() => Math.random() - 0.5));
+					setPageNumber(data.page);
 				})
 			)
 			.catch(error => {
 				console.log(`An error has occured: ${error}`);
 			});
-	}, []);
+	}, [pageNumber]);
 	useEffect(() => {
-		fetch(`${BASE_URL}movie/now_playing?api_key=${API_KEY}`)
+		fetch(`${BASE_URL}movie/now_playing?api_key=${API_KEY}&page=${pageNumber}`)
 			.then(response =>
 				response.json().then(data => {
 					setNowPlayingMovies(data.results.sort(() => Math.random() - 0.5));
+					setPageNumber(data.page);
 				})
 			)
 			.catch(error => {
 				console.log(`An error has occured: ${error}`);
 			});
-	}, []);
+	}, [pageNumber]);
 	useEffect(() => {
-		fetch(`${BASE_URL}movie/top_rated?api_key=${API_KEY}`)
+		fetch(`${BASE_URL}movie/top_rated?api_key=${API_KEY}&page=${pageNumber}`)
 			.then(response =>
 				response.json().then(data => {
 					setTopRatedMovies(data.results);
+					setPageNumber(data.page);
 				})
 			)
 			.catch(error => {
 				console.log(`An error has occured: ${error}`);
 			});
-	}, []);
+	}, [pageNumber]);
 	useEffect(() => {
 		fetch(`${BASE_URL}genre/movie/list?api_key=${API_KEY}`)
 			.then(response =>
 				response.json().then(data => {
 					setGenres(data.genres);
+					setPageNumber(data.page);
 				})
 			)
 			.catch(error => {
 				console.log(`An error has occured: ${error}`);
 			});
 	}, []);
+	useEffect(() => {
+		setPageNumber(1);
+	}, [location]);
 
 	return (
 		<div className='container'>
@@ -91,6 +104,25 @@ function App() {
 							topRatedMovies={topRatedMovies}
 							IMG_URL={IMG_URL}
 							genres={genres}
+							favorites={favorites}
+							setFavorites={setFavorites}
+							setPageNumber={setPageNumber}
+						/>
+					}
+				/>
+				<Route
+					path='watchlist'
+					element={
+						<CategoryPage
+							API_KEY={API_KEY}
+							BASE_URL={BASE_URL}
+							movies={favorites}
+							IMG_URL={IMG_URL}
+							category={'watchlist'}
+							title={'Watchlist'}
+							favorites={favorites}
+							setFavorites={setFavorites}
+							setPageNumber={setPageNumber}
 						/>
 					}
 				/>
@@ -104,6 +136,7 @@ function App() {
 							IMG_URL={IMG_URL}
 							category={'upcoming'}
 							title='Upcoming movies'
+							setPageNumber={setPageNumber}
 						/>
 					}
 				/>
@@ -117,6 +150,7 @@ function App() {
 							IMG_URL={IMG_URL}
 							category={'popular'}
 							title='Popular now'
+							setPageNumber={setPageNumber}
 						/>
 					}
 				/>
@@ -130,6 +164,7 @@ function App() {
 							IMG_URL={IMG_URL}
 							category={'now_playing'}
 							title='Now playing'
+							setPageNumber={setPageNumber}
 						/>
 					}
 				/>
@@ -143,6 +178,7 @@ function App() {
 							IMG_URL={IMG_URL}
 							category={'top_rated'}
 							title='Top rated movies'
+							setPageNumber={setPageNumber}
 						/>
 					}
 				/>
@@ -153,10 +189,23 @@ function App() {
 							IMG_URL={IMG_URL}
 							movies={genreMovies}
 							title={`Genre: ${genreTitle}`}
+							setPageNumber={setPageNumber}
+							pageNumber={pageNumber}
 						/>
 					}
 				/>
-				<Route path='movie/:id' element={<MoviePage />} />
+				<Route
+					path='movie/:id'
+					element={
+						<MoviePage
+							favorites={favorites}
+							setFavorites={setFavorites}
+							favBtnText='Add to Watchlist'
+							moreClassesBtn='add-to-favorites-big-btn group'
+							moreClassesText='add-to-favorites-big-text'
+						/>
+					}
+				/>
 				<Route path='*' element={<NotFound />} />
 			</Routes>
 			<div className='genre-search-container'>
@@ -167,6 +216,8 @@ function App() {
 					genres={genres}
 					setGenreMovies={setGenreMovies}
 					setGenreTitle={setGenreTitle}
+					setPageNumber={setPageNumber}
+					pageNumber={pageNumber}
 				/>
 				<Recommended
 					featuredMovies={popularMovies}

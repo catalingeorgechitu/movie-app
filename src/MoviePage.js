@@ -1,9 +1,17 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import AddToFavorites from './AddToFavorites';
 import MoviePageRecommendations from './MoviePageRecommendations';
+import RemoveFromFavorites from './RemoveFromFavorites';
 
-export default function MoviePage() {
+export default function MoviePage({
+	favorites,
+	setFavorites,
+	favBtnText,
+	moreClassesBtn,
+	moreClassesText,
+}) {
 	const API_KEY = `${process.env.REACT_APP_API_KEY}`;
 	const BASE_URL = `${process.env.REACT_APP_BASE_URL}`;
 	const IMG_URL = `${process.env.REACT_APP_IMG_URL}`;
@@ -81,6 +89,22 @@ export default function MoviePage() {
 						></iframe>
 					</div>
 
+					<div className='movie-favs-buttons'>
+						<AddToFavorites
+							favorites={favorites}
+							setFavorites={setFavorites}
+							favBtnText={favBtnText}
+							moreClassesBtn={moreClassesBtn}
+							moreClassesText={moreClassesText}
+							movie={movie}
+						/>
+						<RemoveFromFavorites
+							favorites={favorites}
+							setFavorites={setFavorites}
+							movie={movie}
+						/>
+					</div>
+
 					<div className='movie-genres'>
 						{movie.genres.map(genre => (
 							<div className='movie-genre' key={genre.id}>
@@ -94,6 +118,9 @@ export default function MoviePage() {
 						API_KEY={API_KEY}
 						movieId={movieId}
 						IMG_URL={IMG_URL}
+						favorites={favorites}
+						setFavorites={setFavorites}
+						favBtnText='&#43;'
 					/>
 				</div>
 			)}

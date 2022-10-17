@@ -4,22 +4,21 @@ import { Link } from 'react-router-dom';
 export default function Search({ API_KEY, BASE_URL }) {
 	const IMG_URL = 'https://image.tmdb.org/t/p/w200';
 
-	const [searchedMovieValue, setSearchedMovieValue] = useState('');
+	const [inputValue, setInputValue] = useState('');
 	const [filteredMovies, setFilteredMovies] = useState([]);
 
-	function handleChange(e) {
+	function handleUserInput(e) {
 		if (e.target.value !== '') {
-			setSearchedMovieValue(e.target.value);
+			setInputValue(e.target.value);
 		} else {
+			setInputValue('');
 			setFilteredMovies([]);
 		}
 	}
 
 	useEffect(() => {
-		searchedMovieValue !== '' &&
-			fetch(
-				`${BASE_URL}search/movie?api_key=${API_KEY}&query=${searchedMovieValue}`
-			)
+		inputValue !== '' &&
+			fetch(`${BASE_URL}search/movie?api_key=${API_KEY}&query=${inputValue}`)
 				.then(response =>
 					response.json().then(data => {
 						setFilteredMovies(data.results);
@@ -28,7 +27,7 @@ export default function Search({ API_KEY, BASE_URL }) {
 				.catch(error => {
 					console.log(`An error has occured: ${error}`);
 				});
-	}, [searchedMovieValue]);
+	}, [inputValue]);
 
 	return (
 		<div className='searchbar-container'>
@@ -36,13 +35,23 @@ export default function Search({ API_KEY, BASE_URL }) {
 				className='searchbar'
 				type='text'
 				placeholder='Search movie...'
-				onChange={handleChange}
+				value={inputValue}
+				onChange={handleUserInput}
 			/>
+			<button
+				className='btn clean-searchbar'
+				onClick={() => {
+					setInputValue('');
+					setFilteredMovies([]);
+				}}
+			>
+				&#10006;
+			</button>
 
 			{filteredMovies !== '' && (
 				<div className='search-container'>
 					{filteredMovies.slice(0, 10).map(movie => (
-						<Link key={movie.id} to={`/movie/${movie.id}`}>
+						<Link reloadDocument key={movie.id} to={`/movie/${movie.id}`}>
 							<div className='search-movie'>
 								<img
 									className='search-poster'

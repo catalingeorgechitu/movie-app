@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import AddToFavorites from './AddToFavorites';
 import logo from './img/imdb.svg';
 
 export default function FeaturedUpcomingMoviesHomepage({
@@ -7,6 +8,10 @@ export default function FeaturedUpcomingMoviesHomepage({
 	path,
 	IMG_URL,
 	genres,
+	favorites,
+	setFavorites,
+	favBtnText,
+	
 }) {
 	const genreList = [];
 	genres.map(elem => {
@@ -15,6 +20,7 @@ export default function FeaturedUpcomingMoviesHomepage({
 
 	return (
 		<div className='featured-upcoming-movies-container'>
+			
 			<div className='featured-header'>
 				<h2 className='featured-title'>Upcoming movies</h2>
 				<Link className='btn' to={path}>
@@ -42,22 +48,25 @@ export default function FeaturedUpcomingMoviesHomepage({
 											</div>
 											<p className='featured-upcoming-rating'>
 												<img src={logo} alt='IMDB Logo' />
-												{movie.vote_average} rating
+												{movie.vote_average.toFixed(1)} rating
 											</p>
-										</div>
-										<div className='featured-upcoming-more-infos-right'>
-											{/* <Link to='insert trailer here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'> */}
-											<button className='btn watch-trailer-btn watch-upcoming-trailer-btn'>
-												Watch trailer
-											</button>
-											{/* </Link> */}
-											<button className='btn add-to-favorites-btn upcoming-add-to-favorites-btn'>
-												&#43;
-											</button>
 										</div>
 									</div>
 								</div>
 							</Link>
+							<div className='featured-upcoming-more-infos-right'>
+								<Link to={`/movie/${movie.id}`}>
+									<button className='btn watch-trailer-btn watch-upcoming-trailer-btn'>
+										Watch trailer
+									</button>
+								</Link>
+								<AddToFavorites
+									movie={movie}
+									favorites={favorites}
+									setFavorites={setFavorites}
+									favBtnText={favBtnText}
+								/>
+							</div>
 						</div>
 					))}
 			</div>

@@ -38,9 +38,6 @@ export default function Recommended({ featuredMovies, IMG_URL, title }) {
 												<button className='btn watch-trailer-btn watch-other-trailer-btn'>
 													Watch trailer
 												</button>
-												<button className='btn add-to-favorites-btn other-add-to-favorites-btn'>
-													&#43;
-												</button>
 											</div>
 										</div>
 									</div>

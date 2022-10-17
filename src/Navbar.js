@@ -9,10 +9,10 @@ export default function Navbar() {
 					Movies
 				</Link>
 				<Link className='btn navbar-btn' to='/shows'>
-					TV Shows
+					TV Shows (under maintenance)
 				</Link>
 			</div>
-			<div>some icons here</div>
+			{/* <div>some icons here</div> */}
 		</div>
 	);
 }

@@ -1,33 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logo from './img/imdb.svg';
 
 export default function CategoryPage({
 	movies,
 	IMG_URL,
-	category,
-	BASE_URL,
-	API_KEY,
 	title,
+	setPageNumber,
 }) {
-	// const [categoryMovies, setCategoryMovies] = useState(movies);
-	// const [pageNumber, setPageNumber] = useState('1');
-
-	// useEffect(() => {
-	// 	fetch(`${BASE_URL}movie/${category}?api_key=${API_KEY}`)
-	// 		.then(response =>
-	// 			response.json().then(data => {
-	// 				setCategoryMovies(data.results);
-	// 			})
-	// 		)
-	// 		.catch(error => {
-	// 			console.log(`An error has occured: ${error}`);
-	// 		});
-	// }, [pageNumber]);
-
-	// function increasePageNumber() {
-	// 	setPageNumber(parseInt(pageNumber) + 1);
-	// }
+	const pageLimit = 10;
+	const pageArray = [...Array(pageLimit + 1).keys()].splice(1);
 
 	return (
 		<div className='main-container'>
@@ -52,7 +34,7 @@ export default function CategoryPage({
 										<p className='category-overview'>{movie.overview}</p>
 										<p className='category-rating'>
 											<img src={logo} alt='IMDB Logo' />
-											{movie.vote_average} rating
+											{movie.vote_average.toFixed(1)} rating
 										</p>
 									</div>
 								</div>
@@ -60,9 +42,19 @@ export default function CategoryPage({
 						</div>
 					))}
 			</div>
-			{/* <button onClick={increasePageNumber} className='m-10'>
-				Increase page number
-			</button> */}
+
+			<div className='page-numbers'>
+				{pageArray &&
+					pageArray.map(elem => (
+						<button
+							className='page-number'
+							onClick={() => setPageNumber(elem)}
+							key={elem}
+						>
+							{elem}
+						</button>
+					))}
+			</div>
 		</div>
 	);
 }

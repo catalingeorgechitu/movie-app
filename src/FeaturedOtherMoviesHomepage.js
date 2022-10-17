@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import AddToFavorites from './AddToFavorites';
 import logo from './img/imdb.svg';
 
 export default function FeaturedOtherMoviesHomepage({
@@ -7,8 +8,10 @@ export default function FeaturedOtherMoviesHomepage({
 	title,
 	path,
 	IMG_URL,
+	favorites,
+	setFavorites,
+	favBtnText,
 }) {
-
 	return (
 		<div className='featured-popular-movies-container'>
 			<div className='featured-header'>
@@ -36,20 +39,25 @@ export default function FeaturedOtherMoviesHomepage({
 											</p>
 											<p className='featured-other-rating'>
 												<img src={logo} alt='IMDB Logo' />
-												{movie.vote_average} rating
+												{movie.vote_average.toFixed(1)} rating
 											</p>
-										</div>
-										<div className='featured-other-more-infos-right'>
-											<button className='btn watch-trailer-btn watch-other-trailer-btn'>
-												Watch trailer
-											</button>
-											<button className='btn add-to-favorites-btn other-add-to-favorites-btn'>
-												&#43;
-											</button>
 										</div>
 									</div>
 								</div>
 							</Link>
+							<div className='featured-other-more-infos-right'>
+								<Link to={`/movie/${movie.id}`}>
+									<button className='btn watch-trailer-btn watch-other-trailer-btn'>
+										Watch trailer
+									</button>
+								</Link>
+								<AddToFavorites
+									movie={movie}
+									favorites={favorites}
+									setFavorites={setFavorites}
+									favBtnText={favBtnText}
+								/>
+							</div>
 						</div>
 					))}
 			</div>
