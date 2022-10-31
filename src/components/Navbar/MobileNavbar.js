@@ -79,7 +79,7 @@ export default function MobileNavbar({
 				/>
 			</div>
 			{searchBarOpened && (
-				<div className='bg-[#1A171E] flex flex-col absolute top-14 gap-3 p-1 z-50 border border-gray-500 rounded-md max-w-screen'>
+				<div className='bg-[#1A171E] flex flex-col absolute right-0 top-14 gap-3 p-1 z-50 border border-gray-500 rounded-md max-w-screen'>
 					<Search API_KEY={API_KEY} BASE_URL={BASE_URL} />
 					<Genre
 						API_KEY={API_KEY}
