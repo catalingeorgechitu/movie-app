@@ -16,8 +16,6 @@ export default function Genre({
 	});
 	const navigate = useNavigate();
 
-	console.log(pageNumber);
-
 	useEffect(() => {
 		fetchData(movieGenre);
 	}, [movieGenre, pageNumber]);

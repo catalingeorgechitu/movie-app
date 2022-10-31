@@ -1,6 +1,7 @@
-import FeaturedOtherMoviesHomepage from './FeaturedOtherMoviesHomepage';
-import FeaturedUpcomingMoviesHomepage from './FeaturedUpcomingMoviesHomepage';
-import Navbar from './Navbar';
+import FeaturedOtherMoviesHomepage from '../Featured/FeaturedOtherMoviesHomepage';
+import FeaturedUpcomingMoviesHomepage from '../Featured/FeaturedUpcomingMoviesHomepage';
+import MobileNavbar from '../Navbar/MobileNavbar';
+import Navbar from '../Navbar/Navbar';
 
 function Home({
 	upcomingMovies,
@@ -9,12 +10,26 @@ function Home({
 	topRatedMovies,
 	IMG_URL,
 	genres,
+	setGenreMovies,
+	setGenreTitle,
 	favorites,
 	setFavorites,
-
+	API_KEY,
+	BASE_URL,
+	setPageNumber,
+	pageNumber,
 }) {
 	return (
 		<div className='home-container'>
+			<MobileNavbar
+				API_KEY={API_KEY}
+				BASE_URL={BASE_URL}
+				genres={genres}
+				setGenreMovies={setGenreMovies}
+				setGenreTitle={setGenreTitle}
+				setPageNumber={setPageNumber}
+				pageNumber={pageNumber}
+			/>
 			<Navbar />
 			<FeaturedUpcomingMoviesHomepage
 				upcomingMovies={upcomingMovies}

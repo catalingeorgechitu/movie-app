@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AddToFavorites from './AddToFavorites';
-import logo from './img/imdb.svg';
+import AddToFavorites from '../Favorites/AddToFavorites';
+import logo from '../../assets/img/imdb.svg';
 
 export default function FeaturedUpcomingMoviesHomepage({
 	upcomingMovies,
@@ -11,7 +11,6 @@ export default function FeaturedUpcomingMoviesHomepage({
 	favorites,
 	setFavorites,
 	favBtnText,
-	
 }) {
 	const genreList = [];
 	genres.map(elem => {
@@ -20,7 +19,6 @@ export default function FeaturedUpcomingMoviesHomepage({
 
 	return (
 		<div className='featured-upcoming-movies-container'>
-			
 			<div className='featured-header'>
 				<h2 className='featured-title'>Upcoming movies</h2>
 				<Link className='btn' to={path}>

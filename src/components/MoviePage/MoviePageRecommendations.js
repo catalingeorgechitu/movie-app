@@ -1,28 +1,41 @@
 import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import AddToFavorites from './AddToFavorites';
-import logo from './img/imdb.svg';
+import AddToFavorites from '../Favorites/AddToFavorites';
+import logo from '../../assets/img/imdb.svg';
 
-export default function FeaturedOtherMoviesHomepage({
-	featuredMovies,
-	title,
-	path,
+export default function MoviePageRecommendations({
+	BASE_URL,
+	API_KEY,
+	movieId,
 	IMG_URL,
 	favorites,
 	setFavorites,
 	favBtnText,
 }) {
+	const [recommendedMovies, setRecommendedMovies] = useState([]);
+
+	useEffect(() => {
+		fetch(`${BASE_URL}movie/${movieId}/recommendations?api_key=${API_KEY}`)
+			.then(response =>
+				response.json().then(data => {
+					setRecommendedMovies(data.results.sort(() => Math.random() - 0.5));
+				})
+			)
+			.catch(error => {
+				console.log(`An error has occured: ${error}`);
+			});
+	}, [movieId]);
+
 	return (
-		<div className='featured-popular-movies-container'>
-			<div className='featured-header'>
-				<h2 className='featured-title'>{title}</h2>
-				<Link className='btn' to={path}>
-					See all &gt;
-				</Link>
+		<div className='recommendation-container'>
+			<div className='recommendation-header'>
+				<h2 className='recommendation-title'>Similar movies:</h2>
 			</div>
-			<div className='featured-movies'>
-				{featuredMovies &&
-					featuredMovies.slice(0, 8).map(movie => (
+			<div className='recommendation-movies-container'>
+				{recommendedMovies &&
+					recommendedMovies.slice(0, 8).map(movie => (
 						<div key={movie.id} className='featured-other-movie'>
 							<Link to={`/movie/${movie.id}`}>
 								<img

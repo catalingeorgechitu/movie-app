@@ -1,9 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import AddToFavorites from './AddToFavorites';
+import AddToFavorites from '../Favorites/AddToFavorites';
 import MoviePageRecommendations from './MoviePageRecommendations';
-import RemoveFromFavorites from './RemoveFromFavorites';
+import RemoveFromFavorites from '../Favorites/RemoveFromFavorites';
 
 export default function MoviePage({
 	favorites,
@@ -44,6 +44,13 @@ export default function MoviePage({
 				});
 		}
 	}, [movieId]);
+
+	console.log(movie);
+	if (!movie.id) {
+		return <p>Loading...</p>;
+	} else {
+		console.log('done');
+	}
 
 	return (
 		<>

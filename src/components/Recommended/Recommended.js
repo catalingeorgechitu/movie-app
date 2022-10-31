@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from './img/imdb.svg';
+import logo from '../../assets/img/imdb.svg';
 
 export default function Recommended({ featuredMovies, IMG_URL, title }) {
 	const recommendedMovie = [...featuredMovies];

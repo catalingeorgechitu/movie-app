@@ -12,7 +12,6 @@ export default function Navbar() {
 					TV Shows (under maintenance)
 				</Link>
 			</div>
-			{/* <div>some icons here</div> */}
 		</div>
 	);
 }

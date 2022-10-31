@@ -1,6 +1,8 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import logo from './img/imdb.svg';
+import { Link } from 'react-router-dom';
+import logo from '../../assets/img/imdb.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse } from '@fortawesome/free-solid-svg-icons';
 
 export default function CategoryPage({
 	movies,
@@ -13,6 +15,10 @@ export default function CategoryPage({
 
 	return (
 		<div className='main-container'>
+			<Link to='/' className='flex gap-x-2 mb-2 mt-0'>
+				<FontAwesomeIcon icon={faHouse} />
+				<button className='btn'>Back</button>
+			</Link>
 			<h1 className='category-title'>{title}</h1>
 
 			<div className='category-container'>

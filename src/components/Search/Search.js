@@ -29,6 +29,8 @@ export default function Search({ API_KEY, BASE_URL }) {
 				});
 	}, [inputValue]);
 
+	console.log(filteredMovies);
+
 	return (
 		<div className='searchbar-container'>
 			<input

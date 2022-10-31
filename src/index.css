@@ -38,7 +38,7 @@
 
 	/* -----container, all the content----- */
 	.container {
-		@apply min-w-full md:flex md:flex-row;
+		@apply min-w-full xl:flex xl:flex-row;
 	}
 	/* -----end of container, all the content----- */
 
@@ -53,7 +53,7 @@
 		@apply absolute right-9 top-0 bottom-0;
 	}
 	.watch-trailer-btn {
-		@apply tracking-wider duration-300 hover:scale-105 hover:text-black;
+		@apply text-sm sm:text-base tracking-wider duration-300 hover:scale-105 hover:text-black;
 	}
 	.watch-upcoming-trailer-btn,
 	.watch-other-trailer-btn {
@@ -66,28 +66,28 @@
 		@apply relative mb-2 mr-2 inline-flex h-fit w-fit items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-pink-800 to-orange-500 p-0.5 text-sm font-medium text-white duration-300 hover:scale-105 hover:text-white focus:outline-none focus:ring-pink-200 group-hover:from-pink-800 group-hover:to-orange-500 dark:text-white dark:focus:ring-pink-800;
 	}
 	.add-to-favorites-big-text {
-		@apply relative rounded-md bg-black px-2 py-2 transition-all duration-300 ease-in group-hover:bg-opacity-0 dark:bg-gray-900;
+		@apply relative rounded-md bg-black px-2 py-2 transition-all duration-300 ease-in group-hover:bg-opacity-0 dark:bg-gray-900 text-xs md:text-base;
 	}
 	.remove-favorites-button {
 		@apply relative mb-2 mr-2 inline-flex items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-pink-800 to-orange-500 p-0.5 text-sm font-medium text-white duration-300 hover:scale-105 hover:text-white focus:outline-none focus:ring-pink-200 group-hover:from-pink-800 group-hover:to-orange-500 dark:text-white dark:focus:ring-pink-800;
 	}
 	.remove-favorites-button-text {
-		@apply relative rounded-md bg-black px-2 py-2 transition-all duration-300 ease-in group-hover:bg-opacity-0 dark:bg-gray-900;
+		@apply relative rounded-md bg-black px-2 py-2 transition-all duration-300 ease-in group-hover:bg-opacity-0 dark:bg-gray-900 text-xs md:text-base;
 	}
 	.movie-favs-buttons {
-		@apply flex w-full max-w-[1000px] gap-x-3 pb-4;
+		@apply flex w-full w-full gap-x-3 pb-4;
 	}
 	/* -----end of buttons----- */
 
 	/* -----left menu----- */
 	.menu-container {
-		@apply sticky top-0 h-screen w-56 shrink-0 space-y-8 overflow-y-auto bg-[#1A171E] px-6 pt-20;
+		@apply hidden xl:block sticky top-0 h-screen w-56 shrink-0 space-y-8 overflow-y-auto bg-[#1A171E] px-6 pt-20;
 	}
 	.submenu-container {
 		@apply border-b border-b-[#75787d65];
 	}
 	.submenu-title {
-		@apply text-sm text-[#9b9fa5];
+		@apply pl-2 sm:pl-2 text-sm text-[#9b9fa5];
 	}
 	.submenu-elements {
 		@apply gap-3 space-y-6 py-4;
@@ -105,34 +105,37 @@
 
 	/* -----navbar----- */
 	.navbar-container {
-		@apply flex justify-between border-b border-b-[#75787d65] pt-8 pb-4 text-xl;
+		@apply flex justify-between border-b border-b-[#75787d65] xl:pt-8 pb-4 text-base sm:text-xl;
 	}
 	.navbar-container > .navbar-titles {
-		@apply flex gap-14;
+		@apply flex gap-5 md:gap-10 lg:gap-14;
 	}
 	/* -----end of navbar----- */
 
 	/* -----main container / main page ----- */
 	.main-container {
-		@apply relative grow px-10 pt-10;
+		@apply relative grow px-5 sm:px-10 pt-5 sm:pt-10 min-h-screen;
 	}
 	.home-container {
-		@apply min-w-[500px] overflow-y-auto px-10 pb-5;
+		@apply min-w-[350px] overflow-y-auto px-3 lg:px-10 pb-5;
 	}
 	.featured-header {
-		@apply flex justify-between pt-8 pb-4 text-xl;
+		@apply flex justify-between pt-8 pb-4;
 	}
 	.featured-header > .featured-title {
-		@apply text-2xl font-bold text-white;
+		@apply text-xl sm:text-2xl font-bold text-white;
+	}
+	.featured-header a {
+		@apply sm:text-xl;
 	}
 	.featured-movies {
 		@apply flex flex-nowrap overflow-x-auto;
 	}
 	.featured-upcoming-movie {
-		@apply relative mr-4 w-[600px] shrink-0 duration-500 hover:scale-95;
+		@apply relative mr-4 w-[330px] sm:w-[600px] shrink-0 duration-500 hover:scale-95;
 	}
 	.featured-other-movie {
-		@apply relative mr-4 w-[400px] shrink-0 duration-500 hover:scale-95;
+		@apply relative mr-4 w-[280px] sm:w-[400px] shrink-0 duration-500 hover:scale-95;
 	}
 	.featured-upcoming-infos {
 		@apply absolute bottom-0 w-full px-8 pb-5;
@@ -141,7 +144,7 @@
 		@apply absolute bottom-0 w-full px-4 py-2;
 	}
 	.featured-upcoming-title {
-		@apply text-2xl font-bold text-white drop-shadow-xl;
+		@apply text-xl sm:text-2xl font-bold text-white drop-shadow-xl;
 	}
 	.featured-other-title {
 		@apply text-xl font-bold text-white drop-shadow-md;
@@ -150,7 +153,7 @@
 		@apply flex max-w-[370px] flex-wrap space-x-1;
 	}
 	.featured-upcoming-genre p {
-		@apply my-1 rounded-md bg-[#0D0D0F] px-1 text-lg tracking-wide text-white opacity-80;
+		@apply my-1 rounded-md bg-[#0D0D0F] px-1 sm:text-lg tracking-wide text-white opacity-80;
 	}
 	.featured-other-date,
 	.category-date {
@@ -180,7 +183,7 @@
 
 	/* -----right menu----- */
 	.genre-search-container {
-		@apply sticky top-0 h-screen w-96 shrink-0 overflow-y-auto bg-[#1A171E] px-4 pt-10;
+		@apply hidden xl:block sticky top-0 h-screen w-96 shrink-0 overflow-y-auto bg-[#1A171E] px-4 pt-10;
 	}
 	.searchbar-container {
 		@apply relative;
@@ -207,10 +210,10 @@
 		@apply grid grid-cols-2 gap-2 pt-3;
 	}
 	.genre {
-		@apply flex w-40 items-center justify-between rounded-full bg-[#0D0D0F] p-1 pl-2 tracking-wider shadow-lg duration-300 hover:scale-105;
+		@apply text-sm sm:text-base flex  w-40 items-center justify-between rounded-full bg-[#0D0D0F] p-1 pl-2 tracking-wider shadow-lg duration-300 hover:scale-105;
 	}
 	.genre-add-btn {
-		@apply pr-2 text-xl;
+		@apply pr-2 sm:text-xl;
 	}
 	.recommended-movie {
 		@apply relative w-full shrink-0 duration-500 hover:scale-95;
@@ -225,16 +228,16 @@
 		@apply mb-10 border-b border-b-[#75787d65] pb-4 text-4xl text-white;
 	}
 	.category-movie {
-		@apply duration-500 hover:scale-105;
+		@apply duration-500 hover:scale-105 border-b xl:border-none pb-2 xl:pb-0 rounded-md border-[#75787d65];
 	}
 	.category-movie a {
-		@apply flex space-x-4 space-y-1;
+		@apply flex flex-wrap xl:flex-nowrap gap-2 md:gap-4 justify-center;
 	}
 	.category-poster {
 		@apply w-[400px] rounded-sm;
 	}
 	.category-movie-title {
-		@apply text-2xl font-bold text-white;
+		@apply text-2xl font-bold text-white mx-auto xl:mx-0;
 	}
 	.category-infos {
 		@apply flex flex-col;
@@ -246,49 +249,49 @@
 		@apply mt-2 flex h-5 gap-1 text-white;
 	}
 	.page-numbers {
-		@apply absolute bottom-5 right-0 left-0 space-x-5 text-center;
+		@apply absolute bottom-5 right-0 left-0 space-x-3 lg:space-x-5 text-center;
 	}
 	.page-number {
-		@apply text-lg duration-300 hover:scale-105 hover:text-white;
+		@apply lg:text-lg duration-300 hover:scale-105 hover:text-white;
 	}
 	/* -----end of main container / category page----- */
 
 	/* -----main container / movie page----- */
 	.movie-container {
-		@apply mb-5 flex grow flex-col items-center px-32 pt-14;
+		@apply mb-5 flex grow flex-col items-center px-3 sm:px-5 pt-14 mx-auto min-w-[350px] max-w-[1000px];
 	}
 	.title-container {
-		@apply flex w-full max-w-[1000px] justify-between;
+		@apply flex flex-wrap sm:flex-nowrap w-full justify-between;
 	}
 	.movie-title {
-		@apply text-5xl text-white;
+		@apply text-3xl md:text-4xl xl:text-5xl text-white;
 	}
 	.movie-rating {
-		@apply my-auto flex flex-col text-center font-bold;
+		@apply my-auto flex sm:flex-col gap-2 sm:gap-0 text-center font-bold;
 	}
 	.movie-rating-value {
-		@apply align-top text-xl text-white;
+		@apply align-top text-lg md:text-xl text-white;
 	}
 	.title-infos {
 		@apply flex gap-x-5 text-white;
 	}
 	.movie-media {
-		@apply flex max-w-[1000px] justify-center gap-x-5 py-4;
+		@apply flex flex-wrap md:flex-nowrap w-full justify-center gap-5 py-4;
 	}
 	.movie-poster {
 		@apply h-[405px] duration-700 hover:scale-105;
 	}
 	.movie-genres {
-		@apply flex w-full max-w-[1000px] gap-x-3;
+		@apply flex flex-wrap w-full gap-3;
 	}
 	.movie-genre {
 		@apply rounded-full border border-[#9b9fa5] px-2 font-bold tracking-wider;
 	}
 	.movie-description {
-		@apply w-full max-w-[1000px] pt-2;
+		@apply w-full w-full pt-2;
 	}
 	.recommendation-container {
-		@apply w-full max-w-[1000px] pt-7;
+		@apply w-full w-full pt-7;
 	}
 	.recommendation-movies-container {
 		@apply flex overflow-x-auto;

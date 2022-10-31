@@ -1,13 +1,13 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Home from './Home';
-import Menu from './Menu';
-import Search from './Search';
-import Genre from './Genre';
-import NotFound from './NotFound';
-import MoviePage from './MoviePage';
-import CategoryPage from './CategoryPage';
+import Home from './components/Homepage/Home';
+import Menu from './components/Menu/Menu';
+import Search from './components/Search/Search';
+import Genre from './components/Genre/Genre';
+import NotFound from './components/NotFound/NotFound';
+import MoviePage from './components/MoviePage/MoviePage';
+import CategoryPage from './components/CategoryPage/CategoryPage';
 import { useState, useEffect } from 'react';
-import Recommended from './Recommended';
+import Recommended from './components/Recommended/Recommended';
 
 function App() {
 	const API_KEY = `${process.env.REACT_APP_API_KEY}`;
@@ -104,9 +104,14 @@ function App() {
 							topRatedMovies={topRatedMovies}
 							IMG_URL={IMG_URL}
 							genres={genres}
+							setGenreTitle={setGenreTitle}
+							setGenreMovies={setGenreMovies}
 							favorites={favorites}
 							setFavorites={setFavorites}
+							pageNumber={pageNumber}
 							setPageNumber={setPageNumber}
+							API_KEY={API_KEY}
+							BASE_URL={BASE_URL}
 						/>
 					}
 				/>
