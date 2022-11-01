@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import AddToFavorites from '../Favorites/AddToFavorites';
 import MoviePageRecommendations from './MoviePageRecommendations';
 import RemoveFromFavorites from '../Favorites/RemoveFromFavorites';
@@ -56,6 +58,10 @@ export default function MoviePage({
 		<>
 			{movie.id && (
 				<div className='movie-container'>
+					<Link to='/' className='flex self-start gap-x-2 pb-5 xl:hidden'>
+						<FontAwesomeIcon icon={faHouse} />
+						<button className='btn'>Home</button>
+					</Link>
 					<div className='title-container'>
 						<div className='title-container-left'>
 							<h3 className='movie-title'>{movie.title}</h3>

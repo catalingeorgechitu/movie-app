@@ -15,9 +15,9 @@ export default function CategoryPage({
 
 	return (
 		<div className='main-container'>
-			<Link to='/' className='flex gap-x-2 mb-2 mt-0'>
+			<Link to='/' className='flex gap-x-2 mb-2 mt-0 xl:hidden'>
 				<FontAwesomeIcon icon={faHouse} />
-				<button className='btn'>Back</button>
+				<button className='btn'>Home</button>
 			</Link>
 			<h1 className='category-title'>{title}</h1>
 

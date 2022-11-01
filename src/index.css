@@ -258,7 +258,7 @@
 
 	/* -----main container / movie page----- */
 	.movie-container {
-		@apply mb-5 flex grow flex-col items-center px-3 sm:px-5 pt-14 mx-auto min-w-[350px] max-w-[1000px];
+		@apply mb-5 flex grow flex-col items-center px-3 sm:px-5 pt-5 sm:pt-14 mx-auto min-w-[350px] max-w-[1000px];
 	}
 	.title-container {
 		@apply flex flex-wrap sm:flex-nowrap w-full justify-between;
